@@ -16,6 +16,12 @@
       integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
       crossorigin="anonymous"
     />
+    <style>
+      #loading,
+      #results {
+        display: none;
+      }
+    </style>
   </head>
   <body class="bg-dark">
     <div class="container">
@@ -66,12 +72,12 @@
             </form>
 
             <!-- LOADER HERE -->
-            <!-- <div id="loading">
+            <div id="loading">
               <img src="img/loading.gif" />
-            </div> -->
+            </div>
 
             <!-- RESULTS -->
-            <div id="result" class="pt-4">
+            <div id="results" class="pt-4">
               <h5>Results</h5>
               <div class="form-group">
                 <div class="input-group">

@@ -1,12 +1,18 @@
 //Listerner for submit
+document.getElementById("loan-form").addEventListener("submit", function (e) {
+  //Hide Result
+  document.getElementById("results").style.display = "none";
 
-document
-  .getElementById("loan-form")
-  .addEventListener("submit", calculateResults);
+  //Show Loader
+  document.getElementById("loading").style.display = "block";
+
+  setTimeout(calculateResults, 2000);
+
+  e.preventDefault();
+});
 
 //Calculate result
-
-function calculateResults(e) {
+function calculateResults() {
   // UI Variables from html
   const amount = document.getElementById("amount");
   const interest = document.getElementById("interest");
@@ -15,7 +21,7 @@ function calculateResults(e) {
   const totalPayments = document.getElementById("total-payment");
   const totalInterest = document.getElementById("total-inerest");
 
-  //Ceate Principali.e the amount loaned
+  //Ceate Principal i.e the amount loaned, interest and amount to pay in 2 decimal places
   const principal = parseFloat(amount.value);
   const calculatedInterest = parseFloat(interest.value) / 100 / 12;
   const calculatedPayments = parseFloat(years.value) * 12;
@@ -29,14 +35,26 @@ function calculateResults(e) {
     monthlyPayment.value = monthly.toFixed(2);
     totalPayments.value = monthly * calculatedPayments.toFixed(2);
     totalInterest.value = monthly * calculatedPayments - principal.toFixed(2);
+
+    //Show results
+    document.getElementById("results").style.display = "block";
+
+    // Hide loader after showing result
+    document.getElementById("loading").style.display = "none";
   } else {
     // Call function that will take in an error message
     showError("Please check your numbers!");
   }
-
-  e.preventDefault();
 }
+
+//Show error message function
 function showError(error) {
+  //Hide results if theres is an error
+  document.getElementById("results").style.display = "none";
+
+  // Hide loader after showing result if theres is an error
+  document.getElementById("loading").style.display = "none";
+
   // create a div
   const errorDiv = document.createElement("div");
 
@@ -59,6 +77,7 @@ function showError(error) {
   setTimeout(clearError, 3000);
 }
 
+// To clear the error
 function clearError() {
   document.querySelector(".alert").remove();
 }
